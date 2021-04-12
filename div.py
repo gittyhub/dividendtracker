@@ -52,20 +52,11 @@ def site(x):
    
   return d
 
-def cashFlow(x):
-  d =  {}
-  site = 'https://finance.yahoo.com/quote/'+x+'/cash-flow?p='+x
-  request = str(urllib.request.urlopen(site).read())
-  s = request.find('annualFreeCashFlow')  
-  e = request.find(']', s)
-  f = request[s+20:e+1]
-  fs= f.strip('[]').split(',')
-  fcf = fs[-1].find(':')
-  fcf_beg = fs[-1].find('"',fcf)
-  fcf_end = fs[-1].find('"',fcf+2)
-  return fs[-1][fcf_beg+1:fcf_end]
 
 def cashFlow1(y):
+  '''Goes to yahoo cash flow page and gets cashflow of each company. Returns all cf as a dataframe'''
+  #Can not add this function to site because it will only do a few before returning 0 cf. 
+  #Running it sepearately and joining it after works best
   d =  {}
   for x in y:
     site = 'https://finance.yahoo.com/quote/'+x+'/cash-flow?p='+x
@@ -77,16 +68,15 @@ def cashFlow1(y):
     fcf = fs[-1].find(':')
     fcf_beg = fs[-1].find('"',fcf)
     fcf_end = fs[-1].find('"',fcf+2)
-    #print(x+': '+fs[-1][fcf_beg+1:fcf_end])
     d[x] = fs[-1][fcf_beg+1:fcf_end]
  
   df = pd.DataFrame.from_dict(d, columns=['FCF'], orient='index') 
   df.reset_index(inplace=True)
   df = df.rename(columns = {'index':'Ticker'})
-  #df.to_csv('fcf.csv')
   return df
 
 def clean_stock_list(x):
+  '''Open specified text file of ticker and puts them in a list for processing, returns list of ticker'''
   #if there is a new line at end of file script wont work properly 
   #if you mess up and have a blank between commas it will also mess up 
   f = open(x,'r').read().splitlines()
@@ -95,6 +85,7 @@ def clean_stock_list(x):
   return set(f)
 
 def create_table(x):
+  '''Takes a list of tickers, grabs data needed, and appends them to a dataframe'''
   pan = pd.DataFrame()
   for i in x:
     pan = pan.append(site(i), ignore_index=True)
@@ -129,8 +120,6 @@ if __name__=="__main__":
     #exp_csv(create_table(clean_stock_list(i)))
     j = cashFlow1(clean_stock_list(i))
     s = create_table(clean_stock_list(i))
-    print(j)
-    print(s)
     df = s.join(j.set_index('Ticker'), on='Ticker')
     exp_csv(df)
   else: 
