@@ -14,3 +14,4 @@ lmt, abr, wmb, v, bac, avgo
 unm, kmi, brmk
 o, jnj, sach, wmc, lft, nymt, ivr, sqft, mitt, abbv, cmo, pep, pg, ko, mrcc, irm, oke, apam, msft, csco, v, amat, ma, txn, awk, bam, slg, ltc, main, ed, cci, pg, luv, ma, ce, hp, unh, mktx, txn, aos, ozk, wrk, tjx, rost, cbrl, cmi, unp, rga, ipar
 acre, bbdc, rc
+ns

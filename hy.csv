@@ -1,0 +1,111 @@
+,Comp_Name,Div_Rate,Div_Yield,Ex_Div,Industry,Price2Book,QuickRatio,Sector,Ticker,Tot.Cash/Share,FCF
+0,"New York Mortgage Trust, Inc. (NYMT)",0.40,8.91,2021-03-24,REIT\xe2\x80\x94Mortgage,0.94,,Real Estate,nymt,0.77,110.55M
+1,Nustar Energy L.P. (NS),1.60,8.89,2021-02-05,Oil & Gas Midstream,4.14,1.31,Energy,ns,1.4,317.27M
+2,Arbor Realty Trust (ABR),1.32,8.29,2021-03-02,REIT\xe2\x80\x94Mortgage,1.56,2.59,Real Estate,abr,2.77,55.16M
+3,"Lument Finance Trust, Inc. (LFT)",0.36,9.94,2021-03-30,REIT\xe2\x80\x94Mortgage,0,108.45,Real Estate,lft,0.46,12.22M
+4,Unum Group (UNM),1.14,4.13,2021-01-28,Insurance\xe2\x80\x94Life,0.52,6.87,Financial Services,unm,8.18,478.40M
+5,Comerica Incorporated (CMA),2.72,3.80,2021-03-12,Banks\xe2\x80\x94Regional,1.30,0,Financial Services,cma,116.54,849.00M
+6,"Altria Group, Inc. (MO)",3.44,6.68,2021-03-24,Tobacco,33.70,0.56,Consumer Defensive,mo,2.66,8.15B
+7,Prospect Capital Corporation (PSEC),0.72,9.00,2021-04-29,Asset Management,0.89,0.60,Financial Services,psec,0.13,429.44M
+8,Microsoft Corporation (MSFT),2.24,0.88,2021-05-19,Software\xe2\x80\x94Infrastructure,14.82,2.36,Technology,msft,17.5,45.23B
+9,"Cisco Systems, Inc. (CSCO)",1.48,2.84,2021-04-05,Communication Equipment,5.62,1.47,Technology,csco,7.25,14.66B
+10,Coca-Cola Company (The),1.68,3.16,2021-03-12,Beverages\xe2\x80\x94Non-Alcoholic,11.85,0.96,Consumer Defensive,ko,2.53,8.67B
+11,"Presidio Property Trust, Inc. (SQFT)",0.40,10.58,2021-03-08,REIT\xe2\x80\x94Diversified,0,1.29,Real Estate,sqft,0.75,3.69M
+12,Eaton Vance Risk-Managed Divers (ETJ),0.91,8.40,2021-04-22,Asset Management,0,0,Financial Services,etj,0,
+13,Whitestone REIT (WSR),0.43,4.51,2021-05-03,REIT\xe2\x80\x94Retail,1.22,1.21,Real Estate,wsr,0.61,42.78M
+14,"Pepsico, Inc. (PEP)",4.09,2.87,2021-03-04,Beverages\xe2\x80\x94Non-Alcoholic,14.62,0.77,Consumer Defensive,pep,6.92,6.37B
+15,Uniti Group Inc. (UNIT),0.60,5.56,2021-03-31,REIT\xe2\x80\x94Specialty,0,0.56,Real Estate,unit,0.33,-159.85M
+16,Falcon Minerals Corporation (FLMN),0.20,4.30,2021-02-24,Oil & Gas E&P,1.71,2.63,Energy,flmn,0.06,25.00M
+17,Johnson & Johnson (JNJ),4.04,2.51,2021-02-22,Drug Manufacturers\xe2\x80\x94General,6.71,0.92,Healthcare,jnj,9.67,20.19B
+18,"Plains All American Pipeline, L (PAA)",0.72,8.00,2021-04-29,Oil & Gas Midstream,0.89,0.61,Energy,paa,0.03,776.00M
+19,Capital Product Partners L.P. (CPLP),0.65,6.05,2021-02-01,Marine Shipping,0.46,0.83,Industrials,cplp,2.6,-104.56M
+20,"MarketAxess Holdings, Inc. (MKTX)",2.64,0.49,2021-02-09,Capital Markets,21.27,4.65,Financial Services,mktx,12.87,358.86M
+21,New Residential Investment Corp (NRZ),0.80,7.27,2021-04-01,REIT\xe2\x80\x94Mortgage,1.01,0.19,Real Estate,nrz,2.98,1.32B
+22,Capstead Mortgage Corporation (CMO),0.60,9.48,2021-03-30,REIT\xe2\x80\x94Mortgage,0.93,0.05,Real Estate,cmo,2.66,158.34M
+23,Verizon Communications Inc. (VZ),2.51,4.37,2021-04-08,Telecom Services,3.51,1.18,Communication Services,vz,5.36,21.45B
+24,UnitedHealth Group Incorporated (UNH),5.00,1.33,2021-03-12,Healthcare Plans,5.43,0.62,Healthcare,unh,20.92,20.12B
+25,"Kinder Morgan, Inc. (KMI)",1.05,6.35,2021-01-29,Oil & Gas Midstream,1.19,0.51,Energy,kmi,0.57,2.84B
+26,"Ross Stores, Inc. (ROST)",1.14,0.89,2021-03-15,Apparel Retail,13.89,1.25,Consumer Cyclical,rost,13.52,1.84B
+27,A.O. Smith Corporation (AOS),1.04,1.55,2021-01-28,Specialty Industrial Machinery,5.89,1.44,Industrials,aos,4.26,505.30M
+28,AT&T Inc. (T),2.08,6.93,2021-04-08,Telecom Services,1.32,0.53,Communication Services,t,1.37,27.45B
+29,Energy Transfer LP (ET),0.61,7.74,2021-02-05,Oil & Gas Midstream,1.17,0.74,Energy,et,0.14,2.23B
+30,"Barings BDC, Inc. (BBDC)",0.76,7.41,2021-03-09,Credit Services,0.93,11.54,Financial Services,bbdc,1.36,-218.13M
+31,Golar LNG Partners LP (GMLP),0.08,2.31,2021-02-04,Oil & Gas Midstream,0.60,0.10,Energy,gmlp,0.69,139.72M
+32,Cushing Renaissance Fund (The),2.56,6.14,2020-06-12,Asset Management,0,0,Financial Services,szc,0,-6.45M
+33,AbbVie Inc. (ABBV),5.20,4.84,2021-04-14,Drug Manufacturers\xe2\x80\x94General,14.52,0.60,Healthcare,abbv,4.81,16.79B
+34,Westrock Company (WRK),0.80,1.52,2021-02-10,Packaging & Containers,1.27,0.81,Consumer Cyclical,wrk,0.96,1.09B
+35,Broadcom Inc. (AVGO),14.40,2.97,2021-03-19,Semiconductors,8.26,1.80,Technology,avgo,23.39,11.60B
+36,Sachem Capital Corp. (SACH),0.48,8.63,2021-04-09,REIT\xe2\x80\x94Mortgage,1.48,5.46,Real Estate,sach,0.87,9.48M
+37,INVESCO MORTGAGE CAPITAL INC (IVR),0.36,9.16,2021-04-08,REIT\xe2\x80\x94Mortgage,0.99,0.03,Real Estate,ivr,0.69,170.46M
+38,Bank of America Corporation (BAC),0.72,1.80,2021-03-04,Banks\xe2\x80\x94Diversified,1.39,0,Financial Services,bac,96.95,37.99B
+39,Iron Mountain Incorporated (Del (IRM),2.47,6.57,2021-03-12,REIT\xe2\x80\x94Specialty,9.55,0.53,Real Estate,irm,0.71,534.40M
+40,Ares Commercial Real Estate Cor (ACRE),1.32,9.50,2021-03-30,REIT\xe2\x80\x94Mortgage,0.97,6.41,Real Estate,acre,2.26,31.49M
+41,Realty Income Corporation (O),2.82,4.33,2021-03-31,REIT\xe2\x80\x94Retail,2.15,3.97,Real Estate,o,2.21,1.12B
+42,Celanese Corporation Celanese C (CE),2.72,1.79,2021-02-08,Chemicals,4.93,1.38,Basic Materials,ce,13.03,979.00M
+43,Annaly Capital Management Inc (NLY),0.88,10.16,2021-03-30,REIT\xe2\x80\x94Mortgage,0.97,0.15,Real Estate,nly,0.2,-32.15B
+44,Union Pacific Corporation (UNP),3.88,1.74,2021-02-25,Railroads,8.83,0.81,Industrials,unp,2.78,5.61B
+45,Lockheed Martin Corporation (LMT),10.40,2.69,2021-02-26,Aerospace & Defense,17.92,1.05,Industrials,lmt,11.28,6.42B
+46,Western Asset Mortgage Capital  (WMC),0.24,7.50,2021-03-31,REIT\xe2\x80\x94Mortgage,0.76,7.95,Real Estate,wmc,0.52,-147.65M
+47,"Black Stone Minerals, L.P. (BSM)",0.70,7.61,2021-02-12,Oil & Gas E&P,2.50,1.60,Energy,bsm,0.01,276.99M
+48,Monroe Capital Corporation (MRCC),1.00,9.35,2021-03-15,Mortgage Finance,0.97,1.58,Financial Services,mrcc,0.32,74.93M
+49,Madison Covered Call & Equity S (MCN),0.72,9.11,2021-03-15,0,1.11,0.02,0,mcn,0,
+50,"Helmerich & Payne, Inc. (HP)",1.00,3.72,2021-05-14,Oil & Gas Drilling,0.86,3.32,Energy,hp,4.86,398.09M
+51,The Kraft Heinz Company (KHC),1.60,3.99,2021-03-11,Packaged Foods,0.98,0.68,Consumer Defensive,khc,2.79,4.33B
+52,First Trust Energy Infrastructu (FIF),0.75,6.06,2021-04-01,Asset Management,0,0,Financial Services,fif,0,85.46M
+53,Green Plains Partners LP (GPP),0.48,3.94,2021-02-04,Oil & Gas Midstream,0,0.14,Energy,gpp,0.11,47.63M
+54,Visa Inc. (V),1.28,0.58,2021-02-11,Credit Services,13.97,1.73,Financial Services,v,8.44,9.70B
+55,SL Green Realty Corp (SLG),3.64,5.04,2021-03-30,REIT\xe2\x80\x94Office,1.06,1.27,Real Estate,slg,3.84,554.24M
+56,Bank OZK (OZK),1.12,2.81,2021-04-09,Banks\xe2\x80\x94Regional,1.21,0,Financial Services,ozk,18.51,502.34M
+57,MPLX LP (MPLX),2.75,10.55,2021-02-05,Oil & Gas Midstream,2.23,0.56,Energy,mplx,0.01,3.34B
+58,Brookfield Asset Management Inc (BAM),0.52,1.14,2021-02-25,Asset Management,2.17,0.59,Financial Services,bam,6.58,4.33B
+59,Aberdeen Global Premier Propert (AWP),0.48,7.95,2021-03-23,Asset Management,1.16,0.14,Financial Services,awp,0.04,
+60,"DHT Holdings, Inc. (DHT)",1.08,17.79,2021-02-17,Oil & Gas Midstream,0.93,2.06,Energy,dht,0.4,502.32M
+61,Chimera Investment Corporation (CIM),1.20,9.31,2021-03-30,REIT\xe2\x80\x94Mortgage,0.79,2.37,Real Estate,cim,1.17,257.90M
+62,"Targa Resources, Inc. (TRGP)",0.40,1.27,2021-01-29,Oil & Gas Midstream,2.67,0.62,Energy,trgp,1.06,792.90M
+63,"American Water Works Company, I (AWK)",2.20,1.45,2021-02-05,Utilities\xe2\x80\x94Regulated Water,4.26,0.39,Utilities,awk,3.08,-502.00M
+64,ROYAL DUTCH SHELLA (RDSA.AS),0.59,3.58,2021-02-18,Oil & Gas Integrated,0.82,0.83,Energy,rdsa.as,4.09,17.52B
+65,Southwest Airlines Company (LUV),0,0,2020-03-03,Airlines,4.22,1.93,Industrials,luv,22.57,-1.64B
+66,"LTC Properties, Inc. (LTC)",2.28,5.26,2021-04-21,REIT\xe2\x80\x94Healthcare Facilities,2.21,1.89,Real Estate,ltc,0.2,116.10M
+67,Calamos Global Dynamic Income F (CHW),0.84,7.72,2021-04-13,Asset Management,1.36,0.18,Financial Services,chw,0,61.86M
+68,Sunoco LP (SUN),3.30,10.02,2021-02-05,Oil & Gas Refining & Marketing,4.34,0.62,Energy,sun,1.16,378.00M
+69,"Williams Companies, Inc. (The)",1.64,6.95,2021-03-11,Oil & Gas Midstream,2.44,0.50,Energy,wmb,0.12,2.22B
+70,Oasis Midstream Partners LP (OMP),2.16,9.67,2021-03-05,Oil & Gas Midstream,3.18,1.51,Energy,omp,0.15,157.04M
+71,Texas Instruments Incorporated (TXN),4.08,2.09,2021-01-29,Semiconductors,19.56,3.34,Technology,txn,7.14,5.49B
+72,"Reinsurance Group of America, I (RGA)",2.80,2.17,2021-02-17,Insurance\xe2\x80\x94Reinsurance,0.61,0.81,Financial Services,rga,53.48,3.29B
+73,Main Street Capital Corporation (MAIN),2.46,5.93,2021-04-28,Asset Management,1.85,0.98,Financial Services,main,0.47,-54.08M
+74,Procter & Gamble Company (The),3.16,2.32,2021-01-21,Household & Personal Products,7.10,0.53,Consumer Defensive,pg,4.85,14.33B
+75,"Consolidated Edison, Inc. (ED)",3.10,4.12,2021-02-16,Utilities\xe2\x80\x94Regulated Electric,1.36,0.55,Utilities,ed,3.71,-1.71B
+76,"Applied Materials, Inc. (AMAT)",0.96,0.69,2021-05-26,Semiconductor Equipment & Materials,11.11,2.18,Technology,amat,7.22,3.38B
+77,Mobile TeleSystems PJSC (MBT),0.81,9.96,2020-10-08,Telecom Services,0.24,0.73,Communication Services,mbt,214.82,58.10B
+78,Cummins Inc. (CMI),5.40,2.08,2021-02-18,Specialty Industrial Machinery,4.75,1.24,Industrials,cmi,26.16,2.15B
+79,"Shell Midstream Partners, L.P. (SHLX)",1.84,13.04,2021-02-01,Oil & Gas Midstream,9.60,4.40,Energy,shlx,0.81,623.00M
+80,New Senior Investment Group Inc (SNR),0.26,3.85,2021-03-11,REIT\xe2\x80\x94Residential,2.76,1.10,Real Estate,snr,0.4,39.87M
+81,Mastercard Incorporated (MA),1.76,0.46,2021-04-08,Credit Services,59.15,1.26,Financial Services,ma,10.67,6.52B
+82,Crown Castle International Corp (CCI),5.32,3.04,2021-03-12,REIT\xe2\x80\x94Specialty,7.99,0.41,Real Estate,cci,0.54,1.43B
+83,"Tanger Factory Outlet Centers,  (SKT)",0.71,4.27,2021-01-28,REIT\xe2\x80\x94Retail,4.55,1.04,Real Estate,skt,0.91,164.75M
+84,Cracker Barrel Old Country Stor (CBRL),0,0,2020-08-13,Restaurants,6.83,1.46,Consumer Cyclical,cbrl,23.98,-136.33M
+85,"General Mills, Inc. (GIS)",2.04,3.39,2021-04-08,Packaged Foods,4.14,0.47,Consumer Defensive,gis,4.51,3.22B
+86,"DCP Midstream,  LP (DCP)",1.56,6.97,2021-02-04,Oil & Gas Midstream,0.90,0.54,Energy,dcp,0.27,939.00M
+87,17547 (FEN),1.48,10.75,2021-01-22,Asset Management,1.09,1.71,Financial Services,fen,0.33,120.74M
+88,Broadmark Realty Capital Inc. (BRMK),0.84,7.90,2021-03-30,REIT\xe2\x80\x94Mortgage,0,80.34,Real Estate,brmk,1.68,61.34M
+89,"Global Net Lease, Inc. (GNL)",1.60,8.35,2021-04-09,REIT\xe2\x80\x94Office,1.08,3.38,Real Estate,gnl,1.37,170.47M
+90,Two Harbors Investment Corp (TWO),0.68,9.14,2021-03-26,REIT\xe2\x80\x94Mortgage,0.96,0.12,Real Estate,two,5.74,11.21M
+91,"ARMOUR Residential REIT, Inc. (ARR)",1.20,9.74,2021-04-14,REIT\xe2\x80\x94Mortgage,0.85,0.07,Real Estate,arr,3.41,-257.82M
+92,Viper Energy Partners LP (VNOM),0.56,3.84,2021-03-03,Oil & Gas Midstream,1.57,1.19,Energy,vnom,0.29,130.88M
+93,PIMCO Income Strategy Fund Shar (PFL),1.08,8.99,2021-04-09,0,1.13,0.09,0,pfl,0.05,-20.80M
+94,"ONEOK, Inc. (OKE)",3.74,7.34,2021-01-29,Oil & Gas Midstream,3.75,1.01,Energy,oke,1.18,-296.31M
+95,Ready Capital Corproation (RC),1.40,10.18,2021-04-01,REIT\xe2\x80\x94Mortgage,0.92,3.37,Real Estate,rc,3.14,68.89M
+96,Exxon Mobil Corporation (XOM),3.48,6.21,2021-02-09,Oil & Gas Integrated,1.50,0.44,Energy,xom,1.03,-2.61B
+97,"Dynex Capital, Inc. (DX)",1.56,8.10,2021-03-19,REIT\xe2\x80\x94Mortgage,0.99,0.19,Real Estate,dx,11.43,173.95M
+98,Occidental Petroleum Corporatio (OXY),0.04,0.16,2021-03-09,Oil & Gas E&P,2.60,0.51,Energy,oxy,2.16,901.00M
+99,"AG Mortgage Investment Trust, I (MITT)",0.09,2.23,2021-03-31,REIT\xe2\x80\x94Mortgage,0.98,1.05,Real Estate,mitt,1.16,4.16M
+100,Imperial Oil Limited (IMO),0.70,2.79,2021-03-01,Oil & Gas Integrated,0.85,0.80,Energy,imo,1.05,-70.00M
+101,PIMCO Income Strategy Fund II (PFN),0.96,9.24,2021-04-09,Asset Management,1.10,0.08,Financial Services,pfn,0.02,-38.49M
+102,"TJX Companies, Inc. (The)",1.04,1.50,2021-05-12,Apparel Retail,14.34,1.01,Consumer Cyclical,tjx,8.68,3.99B
+103,"Inter Parfums, Inc. (IPAR)",1.00,1.40,2021-03-12,Household & Personal Products,4.21,2.72,Consumer Defensive,ipar,9.37,52.73M
+104,Antero Midstream Corporation (AM),1.23,13.79,2021-02-02,Oil & Gas Midstream,1.68,0.98,Energy,am,0,556.66M
+105,Ellington Financial Inc. (EFC),1.68,9.56,2021-04-29,Mortgage Finance,0.99,1.12,Financial Services,efc,3.79,119.51M
+106,"Lumen Technologies, Inc. (LUMN)",1.00,7.75,2021-03-05,Telecom Services,0,0.37,Communication Services,lumn,0.37,2.79B
+107,"Orchid Island Capital, Inc. (ORC)",0.78,12.94,2021-03-30,REIT\xe2\x80\x94Mortgage,1.10,0.07,Real Estate,orc,2.83,55.37M
+108,Artisan Partners Asset Manageme (APAM),3.08,5.77,2021-02-11,Asset Management,18.66,1.54,Financial Services,apam,3.16,315.58M
+109,Magellan Midstream Partners L.P (MMP),4.11,9.20,2021-02-04,Oil & Gas Midstream,4.33,0.31,Energy,mmp,0.06,667.80M
