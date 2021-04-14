@@ -6,8 +6,6 @@ import argparse
 import time
 
 parser = argparse.ArgumentParser(description='Get stock data from file of tickers')
-#parser.add_argument('-d','--div_yield', type=str, metavar = '', help='sort the dividend yield highest to lowest')
-#parser.add_argument('-sd','--sort_div', metavar = '',  action='store_true', help='sort by dividend yield highest to lowest')
 parser.add_argument('-inf','--input_file', type=str, metavar = '', help='file of tickers to process')
 parser.add_argument('-exp','--export_csv', type=str, metavar = '', help='expot csv file name, enter name after flag')
 group = parser.add_mutually_exclusive_group()
@@ -21,8 +19,6 @@ def site(x):
   site = 'https://finance.yahoo.com/quote/'+x+'?p='+x+'&.tsrc=fin-srch'
   request = str(urllib.request.urlopen(site).read())
   d['Ticker'] = x
-  #d['FreeCF'] = cashFlow(x) 
-  #print(d.get('Ticker')+': '+d.get('FreeCF'))
   
   name = {'name':'pageData":{"title', 'title':'title', 'find_end':')', 'beg':8, 'end': 1} 
   industry = {'name': 'address1', 'title':'industry', 'find_end':',', 'beg':11, 'end':-1}
@@ -33,10 +29,10 @@ def site(x):
   div_rate = {'name': 'dividendRate":', 'title':'fmt', 'find_end':',', 'beg':6, 'end':-2} 
   quickRatio = {'name': 'quickRatio":', 'title':'fmt', 'find_end':',', 'beg':6, 'end':-2} 
   totalCashPerShare = {'name': 'totalCashPerShare":', 'title':'fmt', 'find_end':',', 'beg':6, 'end':-2} 
-  #freeCashflow = {'name': 'freeCashflow":', 'title':'fmt', 'find_end':',', 'beg':6, 'end':-1} need to scrape the cash flow html
+  currentPrice = {'name': 'currentPrice":', 'title':'fmt', 'find_end':',', 'beg':6, 'end':-2} 
   
-  label = ['Comp_Name', 'Industry', 'Sector', 'Div_Yield', 'Div_Rate','Ex_Div', 'Price2Book', 'QuickRatio', 'Tot.Cash/Share']
-  l = [name , industry, sector, div_yield, div_rate, ex_div, price_to_book, quickRatio, totalCashPerShare] 
+  label = ['Comp_Name', 'Industry', 'Sector', 'Div_Yield', 'Div_Rate','Ex_Div', 'Price2Book', 'QuickRatio', 'Tot.Cash/Share', 'Price']
+  l = [name , industry, sector, div_yield, div_rate, ex_div, price_to_book, quickRatio, totalCashPerShare, currentPrice] 
   for i,e  in zip(l, label):
     anchor = request.find(i.get('name'))
     find_cat = request.find(i.get('title'), anchor)
@@ -44,11 +40,9 @@ def site(x):
     #if request.find('}',request.find('{', anchor)) - request.find('{',anchor) < 2 and e == 'Price2Book':
     if request.find('}',request.find('{', anchor)) - request.find('{',anchor) < 2:
       d[e] = 0
-      #time.sleep(1)
     else:
       final = request[find_cat+i.get('beg'):find_end+i.get('end')]
       d[e] = final.strip('"')
-      #time.sleep(1)
    
   return d
 
@@ -117,16 +111,10 @@ if __name__=="__main__":
   elif args.sort_indust:
     sort_indust(create_table(clean_stock_list(i)))
   elif args.export_csv:
-    #exp_csv(create_table(clean_stock_list(i)))
     j = cashFlow1(clean_stock_list(i))
     s = create_table(clean_stock_list(i))
     df = s.join(j.set_index('Ticker'), on='Ticker')
     exp_csv(df)
   else: 
     print(create_table(clean_stock_list(file)))
-
-  #pd.DataFrame(cashFlow1(clean_stock_list(file))).to_csv('cf.txt', index='False')
-  #print(cashFlow1(clean_stock_list(file)))
-  #c = cashFlow1(clean_stock_list(i))
-  #cashFlow1(clean_stock_list(i))
 
