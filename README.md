@@ -3,13 +3,15 @@ To use the tracker you need a text list of ticker and name the list high_yield.t
 
 You can run it with or without the optional argument. To see acceptable argumentes use python3 div.py -h
 
-## Run without argument. If you run without arguments, you will use the defualt file for list of ticker, high_yield.txt. You can change the file name in the code.
+## Run without argument 
+If you run without arguments, you will use the defualt file for list of ticker, high_yield.txt. You can change the file name in the code.
 
 python3 div.py list.of.ticker.txt
   
 It will print ticker information in the console. No other arguments can be used.
 
-## Run with argument. Running with arguments allow you to specify an input file to read, and that needs to be followed by another  argument, typically the export argument to export the results, df, to a csv. Next, read the csv file in a python shell and view/manipulate the df as needed. The reason is so we can do one pull and avoid overloading the yahoo server.
+## Run with argument
+Running with arguments allow you to specify an input file to read, and that needs to be followed by another  argument, typically the export argument to export the results, df, to a csv. Next, read the csv file in a python shell and view/manipulate the df as needed. The reason is so we can do one pull and avoid overloading the yahoo server.
 
 python3 div.py -inf list.of.ticker.txt -exp name.of.expfile.csv
 
