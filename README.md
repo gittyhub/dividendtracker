@@ -1,4 +1,4 @@
-# dividentracker
+# dividendtracker
 To use the tracker you need a text list of ticker and name the list high_yield.txt. 
 
 You can run it with or without the optional argument. To see acceptable argumentes use python3 div.py -h
