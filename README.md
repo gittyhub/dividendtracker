@@ -24,13 +24,35 @@ If you have a personal portfolio with shares you want to add
 
 myinc = pd.read_csv('myincome.csv')
 shares = pd.read_csv('share.csv')
-
 myinc = myinc.join(shares.set_index('Ticker'), on='Ticker')
+myinc['Value'] = myinc['Price']*myinc['Shares']
+myinc.drop(['Unnamed: 0'], axis=1, inplace=True)
 
-myinc.groupby(['Sector'].sum().plot(kind='pie', y='Value', legend=None, autopct='%1.1%%f')
+#For some reason mcn is not picking up sector in the script, let updat manually until we can fix, find location of mcn
+myinc.at[6, 'Sector'] = 'Financial Services'
+myinc.replace({'Industry':{'0':'Asset Management'}})
+
+myinc.groupby(['Sector']).sum().plot(kind='pie', y='Value', legend=None, autopct='%1.1f%%')
 
 plt.show()
 
 #Get more specific details, more of a pandas review
 myinc[myinc['Sector']=='Real Estate'].sort_values(by='Div_Yield', ascending=False)
+#For some reason mcn is not picking up sector in the script, let updat manually until we can fix, find location of mcn
+myinc.at[6, 'Sector'] = 'Financial Services'
 selection = myinc.loc[:, ['Ticker', 'Price', 'Shares', 'Value']]
+h[h['Ticker'].isin(['bac','mrk'])].loc[:,['Industry','Sector', 'Ticker']]
+
+#For the high yield after you have imported the csv file
+#If you want to convert the FCF to numeric for easy sorting
+
+s = pd.read_csv('high.csv')
+s.drop('Unnamed: 0', 'Comp_Name', inplace=True, axis=1)
+#Extract from 'FCF' column the last character to check for M or B
+#Then if M divide by 1000 else take all but the last character from FCF column
+s['d'] = np.where(s['FCF'].str[-1] == 'M', s['FCF'].str[:-1].astype(float)/1000, s['FCF'].str[:-1].astype(float))
+
+#Sort by your new column
+s['d'] = np.where(s['FCF'].str[-1] == 'M', s['FCF'].str[:-1].astype(float)/1000, s['FCF].str[:-1].astype(float))
+
+
