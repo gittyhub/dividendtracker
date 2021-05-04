@@ -1,4 +1,4 @@
-# dividendtracker
+# dividend_tracker
 To use the tracker you need a text list of ticker and name the list high_yield.txt. 
 
 You can run it with or without the optional argument. To see acceptable argumentes use python3 div.py -h
@@ -59,4 +59,19 @@ s['d'] = np.where(s['FCF'].str[-1] == 'M', s['FCF'].str[:-1].astype(float)/1000,
 #Sort by your new column
 s['d'] = np.where(s['FCF'].str[-1] == 'M', s['FCF'].str[:-1].astype(float)/1000, s['FCF].str[:-1].astype(float))
 
+#dividend_history
+The dividend history script will get the history of the dividend in a given list. 
 
+There are two main functions in here, plot_fig(x) and df_stat(x)
+
+plot_fig(x) will get a list of tickers and plot the dividend and the change in dividend the stock has paid
+
+df_stat(s) will create a data frame of the ticker and show the standard deviation as well as the dicky full, pvalue and the critical values. The df test was applied because we want to see dividend payout that has grown over the its lifetime
+
+To use:
+This will make multiple graphs of all the ticker
+`python3 dividend_history.py -plt file_of_tickers` 
+
+
+This will return a data frame of ticker and show sdt and results of ADF test
+`python3 dividend_history.py -inf file_of_tickers` 
