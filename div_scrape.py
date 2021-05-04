@@ -93,7 +93,7 @@ def sort_indust(x):
 
 def exp_csv(x):  
     #create_table(clean_stock_list(file)).to_csv(args.export_csv, index='False')
-    x.to_csv(args.export_csv, index='False')
+    x.to_csv(args.export_csv, index=False)
  
 if __name__=="__main__":
   #reference:https://www.geeksforgeeks.org/command-line-interface-programming-python/

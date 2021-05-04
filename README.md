@@ -11,7 +11,9 @@ python3 div.py list.of.ticker.txt
 It will print ticker information in the console. No other arguments can be used.
 
 ## Run with argument
-Running with arguments allow you to specify an input file to read, and that needs to be followed by another  argument, typically the export argument to export the results, df, to a csv. Next, read the csv file in a python shell and view/manipulate the df as needed. The reason is so we can do one pull and avoid overloading the yahoo server.
+Running with arguments allow you to specify an input file to read, and that needs to be followed by another  argument, typically 
+the export argument to export the results, df, to a csv. Next, read the csv file in a python shell and view/manipulate the df as needed. 
+The reason is so we can do one pull and avoid overloading the yahoo server.
 
 python3 div.py -inf list.of.ticker.txt -exp name.of.expfile.csv
 
@@ -28,7 +30,7 @@ myinc = pd.read_csv('myincome.csv')
 shares = pd.read_csv('share.csv')
 myinc = myinc.join(shares.set_index('Ticker'), on='Ticker')
 myinc['Value'] = myinc['Price']*myinc['Shares']
-myinc.drop(['Unnamed: 0'], axis=1, inplace=True)
+#myinc.drop(['Unnamed: 0'], axis=1, inplace=True)
 
 #For some reason mcn is not picking up sector in the script, let updat manually until we can fix, find location of mcn
 myinc.at[6, 'Sector'] = 'Financial Services'
