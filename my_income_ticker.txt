@@ -1,2 +1,1 @@
-t, nly, am, arr, cma, dht, enb, fdus, gis, khc, lumn, mplx, psec, two, fif, mcn
-rc, cim
+am, mplx, nly, arr, two, psec, lumn, fdus, enb, t, khc, cma, gis, dht, gmlpf, arlp, bpt, mcn, fif, rc, cim

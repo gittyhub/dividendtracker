@@ -4,6 +4,8 @@ import os
 import sys
 import argparse
 import time
+import requests
+import numpy as np
 
 parser = argparse.ArgumentParser(description='Get stock data from file of tickers')
 parser.add_argument('-inf','--input_file', type=str, metavar = '', help='file of tickers to process')
@@ -13,11 +15,13 @@ group.add_argument('-sdY','--sort_div', action='store_true', help='sort by divid
 group.add_argument('-si','--sort_indust', action='store_true', help='sort by industry')
 args = parser.parse_args()
 
+header = {'User-agent':'Mozilla/5.0'}
 
 def site(x):
   d =  {}
   site = 'https://finance.yahoo.com/quote/'+x+'?p='+x+'&.tsrc=fin-srch'
-  request = str(urllib.request.urlopen(site).read())
+  #request = str(urllib.request.urlopen(site).read())
+  request = str(requests.get(site,headers=header).content)
   d['Ticker'] = x
   
   name = {'name':'pageData":{"title', 'title':'title', 'find_end':')', 'beg':8, 'end': 1} 
@@ -54,7 +58,7 @@ def cashFlow1(y):
   d =  {}
   for x in y:
     site = 'https://finance.yahoo.com/quote/'+x+'/cash-flow?p='+x
-    request = str(urllib.request.urlopen(site).read())
+    request = str(requests.get(site,headers=header).content)
     s = request.find('annualFreeCashFlow')  
     e = request.find(']', s)
     f = request[s+20:e+1]
@@ -86,15 +90,40 @@ def create_table(x):
   return pan
  
 def sort_div(x):
-    print(x.sort_values(by=['Div_Yield']))
+  print(x.sort_values(by=['Div_Yield']))
 
 def sort_indust(x):
-    print(x.sort_values(by=['Industry']))
+  print(x.sort_values(by=['Industry']))
 
 def exp_csv(x):  
-    #create_table(clean_stock_list(file)).to_csv(args.export_csv, index='False')
-    x.to_csv(args.export_csv, index=False)
+  #create_table(clean_stock_list(file)).to_csv(args.export_csv, index='False')
+  x.to_csv(args.export_csv, index=False)
+
+
+def cleanup_high(x):
+  x['M_FCF'] = np.where(x['FCF'].str[-1] == 'M', x['FCF'].str[:-1].astype(float)/1000, x['FCF'].str[:-1].astype(float))
+  col_loc = list(x.columns).index('FCF')
+  MFCF = x.pop('M_FCF')
+  x.insert(col_loc,'M_FCF',MFCF) #going to pop FCF but just incase it matters later
+  #x.drop(['FCF'], axis=1)
+  return x
  
+ 
+def cleanup_shares(x,s):
+  clean_df = x.loc[x['Ticker'] != 'gmlpf']
+  clean_df = clean_df.join(s.set_index('Ticker'), on='Ticker')
+  clean_df['Value'] = clean_df['Price']*clean_df['Shares']
+  clean_df.loc[clean_df['Ticker']=='mcn', 'Industry'] = 'Asset Management'   
+  clean_df.loc[clean_df['Ticker']=='mcn', 'Sector'] = 'Financial Services'  
+
+  clean_df['M_FCF'] = np.where(clean_df['FCF'].str[-1] == 'M', clean_df['FCF'].str[:-1].astype(float)/1000, clean_df['FCF'].str[:-1].astype(float))
+  col_loc = list(x.columns).index('FCF')
+  MFCF = clean_df.pop('M_FCF')
+  clean_df.insert(col_loc-1,'M_FCF',MFCF) #going to pop FCF but just incase it matters later
+  #clean_df.drop(['FCF'], axis=1)
+  return clean_df
+  
+   
 if __name__=="__main__":
   #reference:https://www.geeksforgeeks.org/command-line-interface-programming-python/
   #reference:https://www.youtube.com/watch?v=cdblJqEUDNo
@@ -103,8 +132,8 @@ if __name__=="__main__":
   default file high_yield.txt will be used'''
 
   #add fof and cagr
-  file = 'high_yield.txt' 
-  #file = 'high_yield.cp.txt' 
+  #file = 'high_yield.txt' 
+  file = 'high_yield_ticker.txt' 
   i = args.input_file
   if args.sort_div:
     sort_div(create_table(clean_stock_list(i)))
