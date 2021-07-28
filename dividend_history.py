@@ -6,6 +6,8 @@ from statsmodels.tsa.stattools import adfuller
 import pandas as pd
 import argparse
 import sys
+import requests
+
 
 
 parser = argparse.ArgumentParser(description='Get dividend history and grph from file')
@@ -14,29 +16,32 @@ parser.add_argument('-exp', '--expot_csv', type = str, metavar = '', help = 'epo
 parser.add_argument('-plt', '--plot', type = str, metavar = '', help = 'plots dividend history')
 args = parser.parse_args()
 
+header = {'User-agent':'Mozilla/5.0'}
+
 def ca_TA(x):
-  site = 'https://finance.yahoo.com/quote/'+x+'/history?period1=448156800&period2=1619136000&interval=div%7Csplit&filter=div&frequency=1d&includeAdjustedClose=true'
+  site = 'https://finance.yahoo.com/quote/{}/history?period1=1360281600&period2=1626652800&interval=div|split&filter=div&frequency=1d&includeAdjustedClose=true'.format(x)
   div = {}
   count=0
   anchor=0
-  r = str(urllib.request.urlopen(site).read())
+  r = str(requests.get(site,headers=header).content)
   while r.find('class="Ta', anchor) > 0:
-    count += 1 
-    start = r.find('class="Ta(c)', anchor) 
-    date_string = r[start-28:start-16]
-    date_time_obj = datetime.datetime.strptime(date_string,"%b %d, %Y")
+   count += 1 
+   start = r.find('class="Ta(c)', anchor) 
+   date_string = r[start-28:start-16]
+   date_time_obj = datetime.datetime.strptime(date_string,"%b %d, %Y")
 
-    div_beg_anchor = r.find('<strong data', start)
-    div_start = r.find('>', div_beg_anchor)
-    div_end = r.find('</strong', div_start)
-    #print('start: '+str(start))
-    div_string = r[div_start+1:div_end]
+   div_beg_anchor = r.find('<strong data', start)
+   div_start = r.find('>', div_beg_anchor)
+   div_end = r.find('</strong', div_start)
+   #print('start: '+str(start))
+   div_string = r[div_start+1:div_end]
 
-    div[date_time_obj] = float(div_string)
+   div[date_time_obj] = [float(div_string),x]
 
-    anchor = r.find('class="Ta(c)',anchor+1)
-  
+   anchor = r.find('class="Ta(c)',anchor+1)
+ 
   return div
+#  return r
 
 def plot_fig(x):
   for i in x:
@@ -90,6 +95,16 @@ def clean_stock_list(x):
   f = [i.split(',') for i in f]
   f = [i.strip() for s in f for i in s]
   return set(f)
+
+def get_all_dividend_table(x):
+  df1 = pd.DataFrame()
+  for i in x:
+    div_dic = ca_TA(i)
+    dc = pd.DataFrame(div_dic).T.reset_index()
+    df1 = df1.append(dc)
+  df1.to_csv('all_dividends.csv',index=False)
+
+#all_div[(all_div['index']>'2020-01-31') & (all_div['1']=='enb')]['0'].sum()
 
 if __name__=="__main__":
   
