@@ -1,14 +1,36 @@
 # dividend_tracker
 To use the tracker you need a text list of ticker and name the list high_yield_ticker.txt. 
 
-As of 7/11/2021, use div.py not dividend_tracker.py because the urllib.request function is returning garbage values. Switching over to requests function
+Purpose is to get info on list of tickers, then track it as our own portfolio. Second is to see how much dividend we've got from each stock.
+
+Process:
+Run script to collect data on your stock list (dividend_tracker.py using my list of tickers)
+Output will be a csv file with the data from above, my_income.csv
+Have a list of the stock number of shares you own and purchase date, share.csv
+Import both csv files
+  my = pd.read_csv('my_income.csv')
+  share = pd.read_csv('share.csv')
+
+In the dividend_tracker is function, clean_share to combine output with the list of shares and purhase date
+  import dividend_tracker as dt
+  df = dt.clean_share(my,share)
+
+Next use the get_all_divided_table from the dividend_history file to get all the dividend history for your stock. This wil give you a csv file
+  all_dividends.csv. If you have it already no need to run again unless old, that way you dont make too many request to Yahooa
+  import dividend_history as dh
+  div_his = pd.read_csv('all_divdidends.csv')
+
+Import the divlookup module from dividend_tracker. We are going to apply this function over the df, we dont want to look df because there is a host of issues
+  df['Div_Collected'] = df1.apply(lambda row : divlookup(row['Ticker'], row['Purchase_Date'])['0'].sum(), axis=1)
+
+As of 7/31/2021, use dividend_tracker.py 
 
 You can run it with or without the optional argument. To see acceptable argumentes use python3 div.py -h
 
 ## Run without argument 
 If you run without arguments, you will use the defualt file for list of ticker, high_yield_ticker.txt. You can change the file name in the code.
 
-python3 div.py
+python3 dividend_tracker.py
   
 It will print ticker information in the console. No other arguments can be used.
 

@@ -122,7 +122,9 @@ def cleanup_shares(x,s):
   clean_df.insert(col_loc-1,'M_FCF',MFCF) #going to pop FCF but just incase it matters later
   #clean_df.drop(['FCF'], axis=1)
   return clean_df
-  
+
+def divlookup(t,d):
+  return div_his[div_his['1']==t & (div_hist['index']>'2020-01-01')]  
    
 if __name__=="__main__":
   #reference:https://www.geeksforgeeks.org/command-line-interface-programming-python/

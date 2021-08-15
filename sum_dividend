@@ -1,0 +1,3 @@
+"def divlookup(t,d):\n    return div_his[(div_his['1']==t) & (div_his['index']>'2020-01-01')]\n"
+
+df1.apply(lambda row : divlookup(row['Ticker'], row['Purchase_Date'])['0'].sum(), axis=1) 
