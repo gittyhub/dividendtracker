@@ -14,11 +14,31 @@ CONTENTS OF THIS FILE
 
 Introduction
 ---------------------
+There are two scripts we to be used here:
+dividend_tracker.py 
+dividend_history.py
+
+There will also be three input files the user will need to fill out:
+high_yield_ticker.txt
+my_income_ticker.txt
+shares.csv
+
+#Input files
+These input files will have to be filled out by the user. 
+high_yielding_ticker.txt should contain all dividends the user wishes to track
+my_income_ticker.txt should contain all divided the user want to track/own in their portfolio
+shares.csv is the number of shares the user wants to track/own in conjunction with my_income_ticker.txt
+
+#dividend_yield_ticker.txt
 This script will do two things:
 1)Take a list of dividend yielding stocks and return some info on them, CF, CFC, and liquidity ratios, quick, current 
+  a)Print data to console
+  b)Export data to csv file
 
 2)Take a list of dividend yielding stocks and a list of shares you hold, and return current dividends return (over what period, 1y, 6m)
 
+#dividend_history.py
+1)With the list of dividend stocks from my_income_ticker.txt, graph the historical dividend payout for the stocks
 
 Requirements
 ---------------------
@@ -39,7 +59,7 @@ Configuration
 ---------------------
 To use the tracker you need a text list of ticker and name the list high_yield_ticker.txt. 
 
-The list below is a description of what the files are used for:
+The list below is a description of what the files are used for if available:
 all_dividends.csv-OUTPUT OF ALL Dividends for my_income.csv
 dividend_history.py-DEPRECATED
 dividend_tracker.py
@@ -53,89 +73,110 @@ share.csv-INPUT for ticker, number of shares and date purchased
 sum_dividend-just a file for python code to sum dividends
 
 Process:
-## Run without argument 
-Run script to collect data on your stock list (dividend_tracker.py using my list of tickers, it will use high_yield_ticker.txt for the list of ticker)
-If you run without arguments, you will use the defualt file for list of ticker, high_yield_ticker.txt. You can change the file name in the code.
+#1)Take a list of dividend yielding stocks and return some info on them, CF, CFC, and liquidity ratios, quick, current 
+If the scrip it not working, check the function that looks up the ticker and make sure that the find function is looking for the
+anchors correctly. Usually Yahoo will change the tags we need for the anchor
 
-`python3 dividend_tracker.py
+##1a-Print to console no arguments
+Run script to collect data on your stock list (dividend_tracker.py will use high_yield_ticker.txt for the list of ticker)
+If you run without arguments, you will use the defualt file for list of ticker, high_yield_ticker.txt. You can change the file name in the code
+
+python3 dividend_tracker.py
   
 It will print ticker information in the console. No other arguments can be used.
 
-## Run with argument
-Running with arguments allow you to specify an input file to read, and that needs to be followed by another  argument, typically 
-the export argument to export the results, df, to a csv. 
+##1a-Print to console with arguments
+Running with arguments allow you to allows you to provide different flags for the arguments. You can specify an input/output file to read the 
+tickers and output for the data. There is also an option to print the data to console, run python3 dividend_tracker.py -h to get the list. 
 
-Next, read the csv file in a python shell and view/manipulate the df as needed. 
-The reason is so we can do one pull and use the offline file instead of hitting the yahoo server everytime we want to see our portfolio.
+This will hit Yahoo site everytime you run, best to use on small new ticker list
+Even better would be to get the output, and in python shell do your editing
 
-`python3 div.py -inf list.of.ticker.txt -exp name.of.expfile.csv`
-
-^Will read list of ticker and export a csv file
-
-`python3 div.py -inf list.of.ticker.txt -sdY`
+python3 dividend_tracker.py -inf list.of.ticker.txt -sdY
 
 ^Will read list of ticker and sort them by dividend yield and display in console
 
+##1b-Export ticker data to csv file
+To do this you will need to use several argument flags, the -inf for the list of tickers you want to look up and -exp for the export of the file name you wish to export. From here you can fire up a python shell and import the csv file into pandas and do your analytics there. This is 
+perfered way because we can do one pull and use the offline file instead of hitting the yahoo server everytime we want to 
+see our portfolio.
+
+This will make a request to Yahoo for each of the ticker
+
+python3 dividend_tracker.py -inf high_yield_ticker.txt -exp high_yield_ticker_output.csv
+
+^Will read list of ticker and export a csv file
+
+Fire up your shell and run your analysis as needed 
+
+#2)Take a list of dividend yielding stocks and a list of shares you hold, and return current dividends return (over what period, 1y, 6m)
+##Track your own portfolio with number of shares
+You can use a list of your own stock holding to see how it is performing. 
+Input your holdings into my_income_ticker.txt
+Run the python script with my_income_ticker.txt as the input file and specify and export file
+The export file my_income.csv will have all the data pulled from Yahoo
+
+python3 dividend_tracker.py -inf my_income_ticker.txt -exp my_income_output.csv
+
+Fill out the info into share.csv
+
+Import both csv files. Your going to merge all your stock data from Yahoo and the number of share you filled out in share.csv. From here 
+on out, you will be using this file, it WILL NOT hit Yahoo again
 
 
-Output will be a csv file with the data from above, my_income.csv
-Have a list of the stock number of shares you own and purchase date, share.csv
-Import both csv files
-  my = pd.read_csv('my_income.csv')
-  share = pd.read_csv('share.csv')
+my = pd.read_csv('my_income_output.csv')
+share = pd.read_csv('share.csv')
 
 In the dividend_tracker is function, clean_share to combine output with the list of shares and purhase date
-  import dividend_tracker as dt
-  df = dt.clean_share(my,share)
 
-Next use the get_all_divided_table from the dividend_history file to get all the dividend history for your stock. This wil give you a csv file
-  all_dividends.csv. If you have it already no need to run again unless old, that way you dont make too many request to Yahooa
-  import dividend_history as dh
-  div_his = pd.read_csv('all_divdidends.csv')
+In the div_tracker modules script you can either use cleanup_shares or cleanup_high to clean the csv files you just imported
+clean shares will take your portfolio list and number of shares and arrange the dataframe in a clean fashion
+clean high will only take the list you import and clean it the same way with no shares
+
+import dividend_tracker as dt
+df = dt.cleanup_shares(my,share)
+
+Next use the get_all_divided_table function from the dividend_history file to get all the dividend history for your stock. This wil give you a csv file
+all_dividends.csv 
+
+*If you have it already no need to run again unless old, that way you dont make too many request to Yahoo. First time using dividend_history.py
+import dividend_history as dh
+dh.get_all_dividend_table('my_income_ticker.txt')
+
+#Export is all_dividends.csv
+*4/7/2022
+*Why do we have dividend_history.py and dividend_tracker.py, can we just use dividend_history.py?
+*One is to track dividends and provided data on each company, dividend_tracker and the other is to get historical data, dividend_history.py
+
+import dividend_history as dh
+div_his = pd.read_csv('all_dividends.csv')
 
 Import the divlookup module from dividend_tracker. We are going to apply this function over the df, we dont want to look df because there is a host of issues
-  df['Div_Collected'] = df1.apply(lambda row : divlookup(row['Ticker'], row['Purchase_Date'])['0'].sum(), axis=1)
+Be sure to modify the dividend_history.py script to change the range on period you want to pull in the dividend
 
-As of 7/31/2021, use dividend_tracker.py 
-
-You can run it with or without the optional argument. To see acceptable argumentes use python3 div.py -h
-
-
-## Once csv file exported
-If you have a personal portfolio with shares you want to add them as well
-
-`myinc = pd.read_csv('my_income.csv')`
-
-`shares = pd.read_csv('share.csv')`
-
-#In the div modules script you can either use cleanup_shares or cleanup_high to clean the csv files you just imported
-#clean shares will take your portfolio list and number of shares and arrange the dataframe in a clean fashion
-#clean high will only take the list you import and clean it the same way with no shares
-
-import div as d
-
-df = d.clean_shares(my,shares)
+#df['Div_Collected'] = df.apply(lambda row : divlookup(row['Ticker'], row['Purchase_Date'])['0'].sum(), axis=1)
+#4/10/2022-add a date range instead of taking hard code from function
+df['Div_Collected'] = df.apply(lambda row : dt.divlookup(row['Ticker'], div_his)['0'].sum(), axis=1)
+df['Total_Dividend'] = df.Div_Collected*df.Shares
 
 #From here you can filter as needed
 
 ## Get more specific details, more of a pandas review, slicing
-`myinc[myinc['Sector']=='Real Estate'].sort_values(by='Div_Yield', ascending=False)`
+my[my['Sector']=='Real Estate'].sort_values(by='Div_Yield', ascending=False)
 
-`selection = myinc.loc[:, ['Ticker', 'Price', 'Shares', 'Value']]`
+selection = df.loc[:, ['Ticker', 'Price', 'Shares', 'Value']]
 
-`h[h['Ticker'].isin(['bac','mrk'])].loc[:,['Industry','Sector', 'Ticker']]`
+h[h['Ticker'].isin(['bac','mrk'])].loc[:,['Industry','Sector', 'Ticker']]
 
-#To see what your potfolio allocation is by sector
+To see what your potfolio allocation is by sector
 
 import matplotlib.pyplot as plt
 
-`myinc.groupby(['Sector']).sum().plot(kind='pie', y='Value', legend=None, autopct='%1.1f%%')`
-
-`plt.show()`
+df.groupby(['Sector']).sum().plot(kind='pie', y='Value', legend=None, autopct='%1.1f%%')
+plt.show()
 
 ## dividend_history
 The dividend history script will get the history of the dividend in a given list. 
-
 There are two main functions in here, plot_fig(x) and df_stat(x)
 
 plot_fig(x) will get a list of tickers and plot the dividend and the change in dividend the stock has paid
@@ -144,12 +185,12 @@ df_stat(s) will create a data frame of the ticker and show the standard deviatio
 
 To use:
 This will make multiple graphs of all the ticker
-`python3 dividend_history.py -plt file_of_tickers` 
+python3 dividend_history.py -plt high_yield_ticker.txt
 
 
 This will return a data frame of ticker and show sdt and results of ADF test
-`python3 dividend_history.py -inf file_of_tickers` 
+python3 dividend_history.py -inf high_yield_ticker.txt
 
 #Things to add
 Add column for date purchase, will probably need multiple
-Then create another column to sum up all dividend collected
+#4/10/2022-add a date range instead of taking hard code from function

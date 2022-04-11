@@ -83,14 +83,16 @@ def clean_stock_list(x):
   return set(f)
 
 def create_table(x):
-  '''Takes a list of tickers, grabs data needed, and appends them to a dataframe'''
+  '''Takes a list of tickers, in many cases after it has been cleaned with the function clean_stock_list(x)'''
+  '''grabs data needed, and appends them to a dataframe'''
   pan = pd.DataFrame()
   for i in x:
     pan = pan.append(site(i), ignore_index=True)
   return pan
  
 def sort_div(x):
-  print(x.sort_values(by=['Div_Yield']))
+  x['Div_Yield'] = pd.to_numeric(x.Div_Yield)
+  print(x.sort_values(by=['Div_Yield'],ascending=False))
 
 def sort_indust(x):
   print(x.sort_values(by=['Industry']))
@@ -123,8 +125,9 @@ def cleanup_shares(x,s):
   #clean_df.drop(['FCF'], axis=1)
   return clean_df
 
-def divlookup(t,d):
-  return div_his[div_his['1']==t & (div_hist['index']>'2020-01-01')]  
+def divlookup(t,df):
+  #return div_his[(div_his['1']==t) & (div_his['index']>'2020-01-01')]  
+  return df[(df['1']==t) & (df['index']>'2021-01-01') & (df['index']<'2021-12-31')]  
    
 if __name__=="__main__":
   #reference:https://www.geeksforgeeks.org/command-line-interface-programming-python/

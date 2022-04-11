@@ -18,70 +18,80 @@ args = parser.parse_args()
 
 header = {'User-agent':'Mozilla/5.0'}
 
-def ca_TA(x):
-  site = 'https://finance.yahoo.com/quote/{}/history?period1=1360281600&period2=1626652800&interval=div|split&filter=div&frequency=1d&includeAdjustedClose=true'.format(x)
-  div = {}
-  count=0
-  anchor=0
-  r = str(requests.get(site,headers=header).content)
-  while r.find('class="Ta', anchor) > 0:
-   count += 1 
-   start = r.find('class="Ta(c)', anchor) 
-   date_string = r[start-28:start-16]
-   date_time_obj = datetime.datetime.strptime(date_string,"%b %d, %Y")
+def ca_TA(x): 
+  site = 'https://finance.yahoo.com/quote/{}/history?period1=448156800&period2=1649203200&interval=capitalGain%7Cdiv%7Csplit&filter=div&frequency=1mo&includeAdjustedClose=true'.format(x) 
+  div = {} 
+  count=0 
+  anchor=0 
+  r = str(requests.get(site,headers=header).content) 
+  while r.find('class="Ta(start) Py(10px)"', anchor) > 0: 
+    count += 1 
+    start = r.find('class="Ta(start) Py(10px)"', anchor) 
+    date_string = r[start-28:start-16]  
+    date_time_obj = datetime.datetime.strptime(date_string,"%b %d, %Y") 
 
-   div_beg_anchor = r.find('<strong data', start)
-   div_start = r.find('>', div_beg_anchor)
-   div_end = r.find('</strong', div_start)
-   #print('start: '+str(start))
-   div_string = r[div_start+1:div_end]
+    div_beg_anchor = r.find('<strong', start) 
+    div_start = r.find('>', div_beg_anchor) 
+    div_end = r.find('</strong', div_start) 
+    div_string = r[div_start+1:div_end] 
 
-   div[date_time_obj] = [float(div_string),x]
+    div[date_time_obj] = [float(div_string),x ]
 
-   anchor = r.find('class="Ta(c)',anchor+1)
- 
-  return div
-#  return r
+    anchor = r.find('class="Ta(start) Py(10px)',anchor+1) 
 
-def plot_fig(x):
-  for i in x:
-    key = list(ca_TA(i).values()) 	#get the dividend using ca_TA() function
-    v = np.diff(key)*-1  			#gets the differece in div payout period over period
- 
-    adfuller_results = adfuller(key) 
-    one, five, ten = adfuller_results[4].values() #get the critial value at 1, 5 and 10 percent
-    
-    fig, ax = plt.subplots()  		#creates an empty figure to plot
-    ax.plot(key[::-1], label='Div') 	#plots the $ div payout in reverse order 
-    ax.plot(v[::-1], label='Div_Rate') 	#plot the diff in $ payout in reverse order
- 
-    ax.legend() #adds legend to the figure
+  return div 
 
-    plt.text(0.20,0.7, i.capitalize() +'\n'+ 
-      str('Std: '+ "%.2f" % np.std(key,ddof=0))+'\n'
-        +'ADF Stat: {:.3f}'.format(adfuller_results[0])+'\n' 
-        +'p-value: {:.3f}'.format(adfuller_results[1])+'\n'
-        +'1% Critical: '+'{:.3f}'.format(one)+'\n'+'5% Critical: '+'{:.3f}'.format(five)+'\n'+'10% Critical: '+'{:.3f}'.format(ten)+'\n', 
-        horizontalalignment='left', verticalalignment='center', transform = ax.transAxes,fontsize=12) 
-
-    fig.savefig(i)
+def plot_fig(x): 
+    for i in x:  
+      try:
+        key = list(ca_TA(i).values())       #get the dividend using ca_TA() function 
+        v = np.diff([x[0] for x in key])*-1                 #gets the differece in div payout period over period 
+     
+        adfuller_results = adfuller(v) 
+        one, five, ten = adfuller_results[4].values() #get the critial value at 1, 5 and 10 percent 
+     
+        fig, ax = plt.subplots()            #creates an empty figure to plot 
+        ax.plot([x[0] for x in key][::-1], label='Div')     #plots the $ div payout in reverse order 
+        ax.plot(v[::-1], label='Div_Rate')  #plot the diff in $ payout in reverse order 
+       
+        ax.legend() #adds legend to the figure 
+       
+        plt.text(0.20,0.7, i.capitalize() +'\n'+ 
+          str('Std: '+ "%.2f" % np.std([x[0] for x in key],ddof=0))+'\n' 
+            +'ADF Stat: {:.3f}'.format(adfuller_results[0])+'\n' 
+            +'p-value: {:.3f}'.format(adfuller_results[1])+'\n' 
+            +'1% Critical: '+'{:.3f}'.format(one)+'\n'+'5% Critical: '+'{:.3f}'.format(five)+'\n'+'10% Critical: '+'{:.3f}'.format(ten)+'\n', 
+            horizontalalignment='left', verticalalignment='center', transform = ax.transAxes,fontsize=12) 
+     
+        fig.savefig(i) 
+        fig.clf()
+        plt.close()
+      except Exception as e:
+        print('Remove this ticker from list:'+i)
+        print(e)
+        continue
 
 def df_stat(x):
   d = []
   for i in x:
-    key = list(ca_TA(i).values())
-    v = np.diff(key)*-1
+    try:
+      key = [x[0] for x in list(ca_TA(i).values())]
+      v = np.diff(key)*-1
  
-    adfuller_results = adfuller(key) 
-    one, five, ten = adfuller_results[4].values()
+      adfuller_results = adfuller(key) 
+      one, five, ten = adfuller_results[4].values()
 
-    lable = ['Comp_Name', 'STD', 'ADF_Stat','p-value','Crit_Value(1%)','Crit_Value(5%)','Crit_Value(10%)'] 
-    l = [i,"%.4f" % np.std(key,ddof=0), 
-            '{:.4f}'.format(adfuller_results[0]), 
-            '{:.4f}'.format(adfuller_results[1]), 
-            '{:.4f}'.format(one), '{:.4f}'.format(five), '{:.4f}'.format(ten)]
+      lable = ['Comp_Name', 'STD', 'ADF_Stat','p-value','Crit_Value(1%)','Crit_Value(5%)','Crit_Value(10%)'] 
+      l = [i,"%.4f" % np.std(key,ddof=0), 
+              '{:.4f}'.format(adfuller_results[0]), 
+              '{:.4f}'.format(adfuller_results[1]), 
+              '{:.4f}'.format(one), '{:.4f}'.format(five), '{:.4f}'.format(ten)]
 
-    d.append(l)
+      d.append(l)
+    except Exception as e:
+      print('Remove this ticker from list:'+i)
+      print(e)
+      continue
 
   df = pd.DataFrame(d,columns=['Comp_Name', 'STD', 'ADF_Stat','p-value','Crit_Value(1%)','Crit_Value(5%)','Crit_Value(10%)'])
 
@@ -98,7 +108,8 @@ def clean_stock_list(x):
 
 def get_all_dividend_table(x):
   df1 = pd.DataFrame()
-  for i in x:
+  sl = clean_stock_list(x)
+  for i in sl:
     div_dic = ca_TA(i)
     dc = pd.DataFrame(div_dic).T.reset_index()
     df1 = df1.append(dc)
