@@ -41,6 +41,7 @@ def ca_TA(x):
 
   return div 
 
+#This takes the list of tickers and goes out to Yahoo and does a request on each ticker, multiple hits to server
 def plot_fig(x): 
     for i in x:  
       try:
@@ -70,6 +71,39 @@ def plot_fig(x):
         print('Remove this ticker from list:'+i)
         print(e)
         continue
+
+#This function will plot the data from the all_dividend.csv file after all_dividend function is ran
+def plot_figAll(x):
+    all = pd.read_csv(x)
+    cc = ['Date', 'Dividend','Ticker']
+    all.columns=cc 
+    u = all.Ticker.unique()
+    for i in u:
+      try:
+        key = all[all.Ticker==i].Dividend       #get the dividend using ca_TA() function
+        v = np.diff(all[all.Ticker==i].Dividend)*1                 #gets the differece in div payout period over period
+
+        adfuller_results = adfuller(v)
+        one, five, ten = adfuller_results[4].values() #get the critial value at 1, 5 and 10 percent
+
+        fig, ax = plt.subplots()            #creates an empty figure to plot
+        ax.plot(key[::-1], label='Div')      #plots the $ div payout in reverse order
+        ax.plot(v[::-1], label='Div_Rate')  #plot the diff in $ payout in reverse order
+
+        ax.legend() #adds legend to the figure
+
+        plt.text(0.20,0.7, 'nly' +'\n'+
+          str('Std: '+ "%.2f" % np.std(key,ddof=0))+'\n'
+          +'ADF Stat: {:.3f}'.format(adfuller_results[0])+'\n'
+          +'p-value: {:.3f}'.format(adfuller_results[1])+'\n'
+          +'1% Critical: '+'{:.3f}'.format(one)+'\n'+'5% Critical: '+'{:.3f}'.format(five)+'\n'+'10% Critical: '+'{:.3f}'.format(ten)+'\n',
+          horizontalalignment='left', verticalalignment='center', transform = ax.transAxes,fontsize=12)
+        fig.savefig(i)
+        fig.clf()
+        plt.close()
+      except Exception as e:
+        print('Remove this ticker from list:'+i)
+        print(e)
 
 def df_stat(x):
   d = []
