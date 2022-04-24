@@ -194,3 +194,21 @@ python3 dividend_history.py -inf high_yield_ticker.txt
 #Things to add
 Add column for date purchase, will probably need multiple
 #4/10/2022-add a date range instead of taking hard code from function
+
+#PRACTICAL
+1. Get you list of tickers
+2. Run this. inf is your input file of tickers, and the exp is your export file of the data you want to pull
+`python3 dividend_tracker.py -inf ameritrade_holdings.txt -exp ameritrade_output.csv
+3. Once you get your data, do your analysis in the interpreter 
+import pandas as pd
+import numpy as np
+import os
+import dividend_tracker as dt
+import matplotlib.pyplot as plt
+my = pd.read_csv('ameritrade_output.csv')
+share = pd.read_csv('ameritrade_share.csv')
+df = dt.cleanup_shares(my,share)
+df.sort_values(by=['Div_Yield'],ascending=False)[['Comp_Name','Div_Yield','Price2Book','QuickRatio','Tot.Cash/Share','M_FCF']]
+
+df.groupby(['Sector']).sum().plot(kind='pie', y='Value', legend=None, autopct='%1.1f%%')
+plt.show()
